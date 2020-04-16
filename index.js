@@ -1,9 +1,9 @@
 const fs = require("fs");
 const axios = require("axios");
 const inquirer = require("inquirer");
-const _ = require("underscore");
+// const _ = require("underscore");
 const generateMarkdown = require("./utils/generateMarkdown");
-// const myToken = require("./utils/api");
+const myToken = require("./utils/api");
 
 inquirer
   .prompt([
@@ -61,7 +61,7 @@ inquirer
   ])
   .then(function ({ username, title, description, tableOfContents, installation, usage, license, contributing, question1, question2 }) {
     var config = {
-      headers: { 'Authorization': `token 1b30ca3e0904f02644ee8aae260b7e32af04efe1` }
+      headers: {'Authorization': `token ${myToken}`}
     }
 
     const queryUrl = `https://api.github.com/users/${username}`;

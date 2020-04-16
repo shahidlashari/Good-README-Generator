@@ -1,7 +1,3 @@
-const api = {
-  getUser(username) {`1b30ca3e0904f02644ee8aae260b7e32af04efe1`
-
-  }
-};
+const api =  (`634934f203b648045f1727ca5340cf14cdca3989`);
 
 module.exports = api;
