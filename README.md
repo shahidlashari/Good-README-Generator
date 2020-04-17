@@ -39,14 +39,12 @@
 **Email**
  *shahid_lashari001@yahoo.com*
 
- **Profile Picture**
- ![Profile Picture](https://avatars0.githubusercontent.com/u/61823648?v=4)
- 
-<<<<<<< HEAD
- **GitHub URL**
- *https://github.com/shahidlashari*
-=======
+ *Profile Picture
+
+ ![Profile Pic](https://avatars0.githubusercontent.com/u/61823648?v=4)
+
+ *GitHub URL
+
  https://github.com/shahidlashari
- 
+
  ![image](utils/ReadMe.gif)
->>>>>>> 12a8cbdf76b2ed07be7d42302f425bcd66a0529e
