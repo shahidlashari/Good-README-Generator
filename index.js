@@ -1,9 +1,7 @@
 const fs = require("fs");
-const axios = require("axios");
 const inquirer = require("inquirer");
-// const _ = require("underscore");
 const generateMarkdown = require("./utils/generateMarkdown");
-const myToken = require("./utils/api");
+const api = require("./utils/api");
 
 inquirer
   .prompt([
@@ -11,6 +9,11 @@ inquirer
       type: "input",
       message: "Enter you Github username",
       name: "username"
+    },
+    {
+      type: "input",
+      message: "Enter your email",
+      name: "email"
     },
 
     {
@@ -59,41 +62,30 @@ inquirer
       name: "question2"
     }
   ])
-  .then(function ({ username, title, description, tableOfContents, installation, usage, license, contributing, question1, question2 }) {
-    var config = {
-      headers: {'Authorization': `token ${myToken}`}
+  .then(async function ({ username, email, title, description, tableOfContents, installation, usage, license, contributing, question1, question2 }) {
+
+    let { name, avatar_url, html_url } = await api.getUser(username);
+
+    const responseData = {
+      name,
+      email,
+      avatar_url,
+      html_url,
+      title,
+      description,
+      tableOfContents,
+      installation,
+      usage,
+      license,
+      contributing,
+      question1,
+      question2
     }
+    const readme = generateMarkdown(responseData);
 
-    const queryUrl = `https://api.github.com/users/${username}`;
-    axios.get(queryUrl, config)
-      .then(({ data }) => {
-        console.log(data);
+    fs.writeFile(`README.md`, readme, err => {
 
-        const {name, email, avatar_url, html_url} = data
-
-        const responseData = {
-          name,
-          email,
-          avatar_url,
-          html_url,
-          title,
-          description,
-          tableOfContents,
-          installation,
-          usage,
-          license,
-          contributing,
-          question1,
-          question2
-        }
-
-        const readme = generateMarkdown(responseData);
-
-        fs.writeFile(`README.md`, readme, err => {
-
-          if (err) throw err;
-          console.log("file successfully written");
-        });
-      });
-
+      if (err) throw err;
+      console.log("file successfully written");
+    });
   });
